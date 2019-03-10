@@ -3,6 +3,7 @@ package com.autentia.pruebatecnica.resources;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
@@ -39,7 +40,7 @@ public class ProfesorResource {
 	public Response getAll() {
 		Response response = Response.ok().entity(profesorService.findAll()).build();
 		
-		System.out.println("Returning response for getAll");
+		//System.out.println("Returning response for getAll");
 		
 		return response;
 		
@@ -54,8 +55,18 @@ public class ProfesorResource {
 		
 		Response response = Response.ok().entity(profesor).build();
 		
-		System.out.println("Returning response for Profesor: " + id_profesor);
+		//System.out.println("Returning response for Profesor: " + id_profesor);
 		
 		return response;
+	}
+	
+	@POST
+	public Response create(Profesor profesor) {
+		if (profesor.getNombre() == null || profesor.getApellidos() == null)
+			return Response.status(500).entity("El nombre del profesor no esta completo").build();
+		else
+			if ("".equals(profesor.getNombre()) || "".equals(profesor.getApellidos()))
+				return Response.status(501).entity("Algún campo del nombre del profesor está en blanco").build();
+		return Response.ok().entity(profesorService.create(profesor)).build();
 	}
 }
