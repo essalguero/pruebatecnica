@@ -13,7 +13,7 @@ import com.autentia.pruebatecnica.model.Profesor;
 
 /**
  * 
- * This interface is used to map the class Professor with the table
+ * This interface is used to map the class Profesor with the table
  * in the database using the MyBatis framework
  * @author Eugenio Salguero
  * @version 0.1
